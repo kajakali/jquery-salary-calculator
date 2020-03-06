@@ -43,6 +43,13 @@ function onReady(){
             title:$('#titleIn').val(),
             salary:Number($('#salaryIn').val()),
         };
+        //clear the inputs
+        $('#firstNameIn').val('');
+        $('#lastNameIn').val('');
+        $('#idIn').val('');
+        $('#titleIn').val('');
+        $('#salaryIn').val('');
+
         employees.push(newEmployeeObjectForArray);
         putPeopleOnDom();
         function putPeopleOnDom(){
@@ -63,20 +70,20 @@ function onReady(){
             for(person of employees){
                 console.log(person.firstName);
             //add the employees array to the table
+            //probably should format the salary...
+
                 $('#employeeTable').append(
                     `<tr>
                         <td>${person.firstName}</td>
                         <td>${person.lastName}</td>
                         <td>${person.id}</td>
                         <td>${person.title}</td>
-                        <td>${person.salary}</td>
+                        <td>${person.salary}</td> 
                         <td><button class="deleteButton">Delete</button></td>
                     </tr>`);
             //add back the table bottom to the table??
-        }
 
-        
- 
+        }
     }  
    
     }
@@ -86,9 +93,9 @@ function onReady(){
         $('#employeeTable').on('click', '.deleteButton', deletePerson);
         function deletePerson(){
             console.log('delete person');
-
+            // look through employees for this employee, and then remove it from the array and refresh the DOM
         }
-    //and then find the delete buttons that are children of the table...)
+   
 
     
     
