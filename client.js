@@ -28,6 +28,8 @@ employees.push(employee1);
 employees.push(employee2);
 employees.push(employee3);
 console.log(employees);
+let monthlyCostsArray = [];
+
 
 
 function onReady(){
@@ -49,7 +51,6 @@ function onReady(){
         $('#idIn').val('');
         $('#titleIn').val('');
         $('#salaryIn').val('');
-
         employees.push(newEmployeeObjectForArray);
         putPeopleOnDom();
         function putPeopleOnDom(){
@@ -67,34 +68,42 @@ function onReady(){
                     <th>Annual Salary</th>
                     <th></th>
                 </tr>`);
+            monthlyCostsArray = [];
             for(person of employees){
                 console.log(person.firstName);
+                monthlyCostsArray.push(person.salary/12);
+
             //add the employees array to the table
             //probably should format the salary...
 
-                $('#employeeTable').append(
+                $('#employeeTable').append( //consider formatting the salary here with js
                     `<tr>
                         <td>${person.firstName}</td>
                         <td>${person.lastName}</td>
                         <td>${person.id}</td>
                         <td>${person.title}</td>
-                        <td>${person.salary}</td> 
+                        <td>$${person.salary}</td> 
                         <td><button class="deleteButton">Delete</button></td>
                     </tr>`);
             //add back the table bottom to the table??
-
-        }
-    }  
-   
-    }
+            } //end for loop to put people on DOM
+            $('#monthlyCost').empty();
+            let monthlyPrice = 0;
+            for (let item of monthlyCostsArray){
+                monthlyPrice = (monthlyPrice + item);
+            }
+            $('#monthlyCost').append(monthlyPrice);
+            // put monthly costs on DOM here.
+        }  //end putting people on DOM
+    }//end putting people into Employees array
     
   
     //know to delete people on click of .deleteButton (class of buttons...no, it'll have to be on table click
-        $('#employeeTable').on('click', '.deleteButton', deletePerson);
-        function deletePerson(){
+        $('#employeeTable').on('click', '.deleteButton', deletePerson); //make an id when I make the idButton? make it match the ID?
+        function deletePerson( event ){
             console.log('delete person');
-            // look through employees for this employee, and then remove it from the array and refresh the DOM
-        }
+            $(this).parent().parent().remove();
+            }
    
 
     
