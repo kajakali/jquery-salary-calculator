@@ -45,23 +45,49 @@ function onReady(){
         };
         employees.push(newEmployeeObjectForArray);
         putPeopleOnDom();
-    function putPeopleOnDom(){
-        // put the people from employees array into the table (before #tableBottom)
-        console.log("show the people in the table");
-        for(person of employees){
-            console.log(person.firstName);
+        function putPeopleOnDom(){
+            // put the people from employees array into the table (including delete buttons)
+          console.log("show the people in the table");
+           //remove the stuff from the table
+           $('#employeeTable').empty();
+                //add table header to table    
+           $('#employeeTable').append(
+                `<tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Annual Salary</th>
+                    <th></th>
+                </tr>`);
+            for(person of employees){
+                console.log(person.firstName);
+            //add the employees array to the table
+                $('#employeeTable').append(
+                    `<tr>
+                        <td>${person.firstName}</td>
+                        <td>${person.lastName}</td>
+                        <td>${person.id}</td>
+                        <td>${person.title}</td>
+                        <td>${person.salary}</td>
+                        <td><button class="deleteButton">Delete</button></td>
+                    </tr>`);
+            //add back the table bottom to the table??
         }
+
+        
+ 
     }  
    
     }
     
-    // create a delete button in each delete button space in the table?
+  
     //know to delete people on click of .deleteButton (class of buttons...no, it'll have to be on table click
-        //$('#employeeTable').on('click', /*grandchildren? */ deletePerson);
-        //function deletePerson(){
-            //console.log('delete person');
+        $('#employeeTable').on('click', '.deleteButton', deletePerson);
+        function deletePerson(){
+            console.log('delete person');
 
-        //}
+        }
     //and then find the delete buttons that are children of the table...)
 
     
