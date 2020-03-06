@@ -87,31 +87,47 @@ function onReady(){
                     </tr>`);
             //add back the table bottom to the table??
             } //end for loop to put people on DOM
-            $('#monthlyCost').empty();
-            let monthlyPrice = 0;
-            for (let item of monthlyCostsArray){
-                monthlyPrice = (monthlyPrice + item);
-            }
-            $('#monthlyCost').append(monthlyPrice);
-            // put monthly costs on DOM here.
+              // put monthly costs on DOM here.
+
+            monthlyCostCalculator();
+           
         }  //end putting people on DOM
     }//end putting people into Employees array
     
   
     //know to delete people on click of .deleteButton (class of buttons...no, it'll have to be on table click
-        $('#employeeTable').on('click', '.deleteButton', deletePerson); //make an id when I make the idButton? make it match the ID?
+        $('#employeeTable').on('click', '.deleteButton', deletePerson); 
         function deletePerson( event ){
             console.log('delete person');
             $(this).parent().parent().remove();
+            // maybe we have to erase the person from the array, too...(this would fix the monthly cost calc)
+            monthlyCostCalculator();
             }
+        // reiterate monthly costs calculator?    
    
 
-    
+    // when i delete a person, their cost doesn't come out of the monthly cost array...
+
     
 
 
 }
 
-
+function monthlyCostCalculator(){
+    $('#monthlyCost').empty();
+    let monthlyPrice = 0;
+    for (let item of monthlyCostsArray){
+        monthlyPrice = (monthlyPrice + item);
+    }
+    $('#monthlyCost').append(monthlyPrice);
+    if(monthlyPrice > 20000){
+        $('#monthlyCost').addClass("red");
+        //add a red class to the span with id #monthlyCost
+    }
+    else{
+        $('#monthlyCost').removeClass("red");
+        //remove any red classes from the span with id #monthlyCost doesn't work yet.
+    }
+} 
 
 
