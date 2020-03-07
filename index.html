@@ -10,7 +10,9 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="jquery-3.4.1.min.js"></script>
+        <script src="bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
         <script src="client.js"></script>
+        <link rel="stylesheet" href="bootstrap-4.4.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -28,7 +30,7 @@
                 <input id="lastNameIn" placeholder="Last Name" type="text">
                 <input id="idIn" placeholder="ID" type="number">
                 <input id="titleIn" placeholder="Title" type="text">
-                <input id="salaryIn" placeholder="Annual Salary" type="text">
+                <input id="salaryIn" placeholder="Annual Salary" type="number">
             </div>
                 <button id="submitButton">Submit</button>
         </div>
@@ -36,7 +38,7 @@
             <h2>
                 Employees
             </h2>
-            <table id="employeeTable">
+            <table id="employeeTable" class="table">
             </table>
         </div>
         <div>

@@ -28,7 +28,7 @@ employees.push(employee1);
 employees.push(employee2);
 employees.push(employee3);
 console.log(employees);
-let monthlyCostsArray = [];
+
 
 
 
@@ -68,10 +68,8 @@ function onReady(){
                     <th>Annual Salary</th>
                     <th></th>
                 </tr>`);
-            monthlyCostsArray = [];
             for(person of employees){
                 console.log(person.firstName);
-                monthlyCostsArray.push(person.salary/12);
 
             //add the employees array to the table
             //probably should format the salary...
@@ -99,8 +97,9 @@ function onReady(){
         $('#employeeTable').on('click', '.deleteButton', deletePerson); 
         function deletePerson( event ){
             console.log('delete person');
+            console.log($(this).parent().parent().text());
             $(this).parent().parent().remove();
-            // maybe we have to erase the person from the array, too...(this would fix the monthly cost calc)
+            //we have to erase the person from the array, too...(this would fix the monthly cost calc)
             monthlyCostCalculator();
             }
         // reiterate monthly costs calculator?    
@@ -116,8 +115,8 @@ function onReady(){
 function monthlyCostCalculator(){
     $('#monthlyCost').empty();
     let monthlyPrice = 0;
-    for (let item of monthlyCostsArray){
-        monthlyPrice = (monthlyPrice + item);
+    for (let item of employees){
+        monthlyPrice += (item.salary/12);
     }
     $('#monthlyCost').append(monthlyPrice);
     if(monthlyPrice > 20000){
