@@ -34,35 +34,44 @@ console.log(employees);
 
 function onReady(){
     console.log('JQ');
-    // know to push a person to the array on click of #submitButton (a person should include a delete button?)
+    // know to push a person to the array on click of #submitButton (a person should include a delete button)
     $('#submitButton').on('click', peopleIntoEmployees);
     function peopleIntoEmployees(){
         console.log(`put person into employees array`);
+        // get rid of any error messages that got made last time through...
+        $('#error').remove();
         //input validation:  All five inputs must exist
         if(
             (!$('#firstNameIn').val() || !$('#lastNameIn').val() || !$('#idIn').val() || !$('#titleIn').val() || !$('#salaryIn').val())
         ){
-            console.log('missing input'); //could change this to mess with the html to show the person.
+            console.log('missing input');
+            //here's where to tell the user about the missing input. before submit button put html
+            $('#submitButton').before('<p class=warning id=error>You are missing an input.</p>');
             return false;
         }
-        // input validation first name, last name may not contain numbers. ID must be 4 digits.
+        // input validation first name, last name may not contain numbers.
         if(!($('#firstNameIn').val().match(/^[^0-9]+$/g)) || !($('#lastNameIn').val().match(/^[^0-9]+$/g))){
-            console.log('name contains letters');
+            console.log('name contains numbers');
+            //heres where to tell the user about numbers in the names
+            $('#submitButton').before('<p class=warning id=error>Employee Names may not contain numbers.</p>');
             return false;
         }
         //ID must be 4 digits.
         if(!($('#idIn').val().match(/^\d{4}$/))){
             console.log('ID number must be 4 digits');
+            //here's where to tell the user about the ID problem
+            $('#submitButton').before('<p class=warning id=error>ID number must be 4 digits long.</p>');
             return false;
         }
         //ID can't be the same as another employee
         for (element of employees){
             if(element.id == $('#idIn').val()){
                 console.log('ID already in use!');
+                //here's where to tell the user about the ID problem
+                $('#submitButton').before('<p class=warning id=error>That ID number is already in use.</p>');
                 return false;
             }
         }
-        
         //take inputs and create an object
         const newEmployeeObjectForArray = {
             firstName:$('#firstNameIn').val(),
