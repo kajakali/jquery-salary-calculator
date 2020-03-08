@@ -135,8 +135,10 @@ function onReady(){
                     if(employees[i].id == employeeID){
                         console.log ('found the employee to erase!');
                         //take the employee out of the employees array
-
+                        employees.splice(i, 1);
+                        console.log(employees);
                     }
+                monthlyCostCalculator();
                 }
                     
                 
