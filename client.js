@@ -1,5 +1,13 @@
 $(document).ready(onReady);
 
+const currency = new Intl.NumberFormat(
+    'en-US',
+    {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+    }
+)
 let employees = [];
 let employee1 = {
     firstName:'Jen',
@@ -110,13 +118,13 @@ function onReady(){
             //add the employees array to the table
             //probably should format the salary...
 
-                $('#employeeTable').append( //consider formatting the salary here with js
+                $('#employeeTable').append( //formatting the salary here with js
                     `<tr>
                         <td>${person.firstName}</td>
                         <td>${person.lastName}</td>
                         <td>${person.id}</td>
                         <td>${person.title}</td>
-                        <td>$${person.salary}</td> 
+                        <td>${currency.format(person.salary)}</td> 
                         <td><button class="deleteButton">Delete</button></td>
                     </tr>`);
             //add back the table bottom to the table??
@@ -173,7 +181,8 @@ function monthlyCostCalculator(){
     for (let item of employees){
         monthlyPrice += (item.salary/12);
     }
-    $('#monthlyCost').append(monthlyPrice);
+    monthlyPriceFormatted = currency.format(monthlyPrice);
+    $('#monthlyCost').append(monthlyPriceFormatted);
     if(monthlyPrice > 20000){
         $('#monthlyCost').addClass("red");
         //add a red class to the span with id #monthlyCost
