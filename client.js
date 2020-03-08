@@ -38,6 +38,32 @@ function onReady(){
     $('#submitButton').on('click', peopleIntoEmployees);
     function peopleIntoEmployees(){
         console.log(`put person into employees array`);
+        //input validation:  All five inputs must exist
+        if(
+            (!$('#firstNameIn').val() || !$('#lastNameIn').val() || !$('#idIn').val() || !$('#titleIn').val() || !$('#salaryIn').val())
+        ){
+            console.log('missing input'); //could change this to mess with the html to show the person.
+            return false;
+        }
+        // input validation first name, last name may not contain numbers. ID must be 4 digits.
+        if(!($('#firstNameIn').val().match(/^[^0-9]+$/g)) || !($('#lastNameIn').val().match(/^[^0-9]+$/g))){
+            console.log('name contains letters');
+            return false;
+        }
+        //ID must be 4 digits.
+        if(!($('#idIn').val().match(/^\d{4}$/))){
+            console.log('ID number must be 4 digits');
+            return false;
+        }
+        //ID can't be the same as another employee
+        for (element of employees){
+            if(element.id == $('#idIn').val()){
+                console.log('ID already in use!');
+                return false;
+            }
+        }
+        
+        //take inputs and create an object
         const newEmployeeObjectForArray = {
             firstName:$('#firstNameIn').val(),
             lastName:$('#lastNameIn').val(),
@@ -51,6 +77,7 @@ function onReady(){
         $('#idIn').val('');
         $('#titleIn').val('');
         $('#salaryIn').val('');
+        //put new employee in the employee array
         employees.push(newEmployeeObjectForArray);
         putPeopleOnDom();
         function putPeopleOnDom(){
@@ -85,8 +112,8 @@ function onReady(){
                     </tr>`);
             //add back the table bottom to the table??
             } //end for loop to put people on DOM
-              // put monthly costs on DOM here.
-
+            
+            // put monthly costs on DOM here.
             monthlyCostCalculator();
            
         }  //end putting people on DOM
@@ -97,7 +124,23 @@ function onReady(){
         $('#employeeTable').on('click', '.deleteButton', deletePerson); 
         function deletePerson( event ){
             console.log('delete person');
-            console.log($(this).parent().parent().text());
+            let deletedPerson = $(this).parent().parent().text();
+            //figure out which person we're deleting
+            let pattern = deletedPerson.match(/(\d+)/m);
+            if(pattern){
+                let employeeID = pattern[0]; // this is the id of the person (if no numbers in names, and ID is 4 digits)
+                console.log(employeeID);
+                // take the employee out of the employee array
+                for (let i = 0; i < employees.length; i++){
+                    if(employees[i].id == employeeID){
+                        console.log ('found the employee to erase!');
+                        //take the employee out of the employees array
+
+                    }
+                }
+                    
+                
+            }
             $(this).parent().parent().remove();
             //we have to erase the person from the array, too...(this would fix the monthly cost calc)
             monthlyCostCalculator();
@@ -107,6 +150,7 @@ function onReady(){
 
     // when i delete a person, their cost doesn't come out of the monthly cost array...
 
+    
     
 
 
