@@ -1,30 +1,39 @@
+
 header {
-    background-color: bisque;
+    background-color:rgb(247, 230, 255);
+    text-align: center;
+    font-family: initial;
+    
 }
 
 h2 {
+    padding:10px 20px 10px 20px;
 
 }
 
-table {
+input {
+    background-color: rgb(247, 230, 255);
+    margin: 2px;
+}
+ #inputDiv {
+     margin: 10px 0px 0px 10px;
+ }
+button {
+    border-radius: 4px;
+}
+ #submitButton {
+     margin-left: 11px;
 
+ }
+
+p {
+    margin-left: 10px;
+}
+#totalMonthly {
+    margin-left: 10px;
 }
 
-th {
 
-}
-
-tr {
-
-}
-
-#tableBottom{
-    background-color: cadetblue;
-}
-
-.deleteButton{
-
-}
 
 .red {
     background-color: red;

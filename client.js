@@ -120,10 +120,10 @@ function onReady(){
 
                 $('#employeeTable').append( //formatting the salary here with js
                     `<tr>
-                        <td>${person.firstName}</td>
-                        <td>${person.lastName}</td>
+                        <td>${toTitleCase(person.firstName)}</td>
+                        <td>${toTitleCase(person.lastName)}</td>
                         <td>${person.id}</td>
-                        <td>${person.title}</td>
+                        <td>${toTitleCase(person.title)}</td>
                         <td>${currency.format(person.salary)}</td> 
                         <td><button class="deleteButton">Delete</button></td>
                     </tr>`);
@@ -192,5 +192,14 @@ function monthlyCostCalculator(){
         //remove any red classes from the span with id #monthlyCost doesn't work yet.
     }
 } 
+
+function toTitleCase(string){
+    return string.replace(
+        /([^\W_]+[^\s-]*) */g, 
+        function(txt){
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+    )
+}
 
 
